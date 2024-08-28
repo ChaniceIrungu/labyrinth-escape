@@ -35,6 +35,8 @@ This project implements a labyrinth solver that finds the shortest path from a s
 
 ## Testing
 
+ Execute the following command to run the tests
+
    ```bash
    npm test
    ```
