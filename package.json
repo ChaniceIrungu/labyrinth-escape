@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node src/labyrinth.ts",
-    "start": "node src/labyrinth.js",
+    "dev": "ts-node src/main.ts",
+    "start": "node src/main.js",
     "test": "jest",
     "build": "tsc"
   },
