@@ -32,3 +32,7 @@
    ```
 
 ## Testing
+
+   ```bash
+   npm test
+   ```
