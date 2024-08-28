@@ -26,6 +26,8 @@ This project implements a labyrinth solver that finds the shortest path from a s
    npm run dev
    ```
 
+   **OR**
+
 2. Execute the following command to build and run the app:
 
    ```bash
