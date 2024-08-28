@@ -18,8 +18,17 @@
 
 ## Running the Application
 
-1. Execute the following command:
+1. Execute the following command to run the app in development mode:
 
    ```bash
    npm run dev
    ```
+
+2. Execute the following command to build and run the app:
+
+   ```bash
+   npm run build
+   npm start
+   ```
+
+## Testing
