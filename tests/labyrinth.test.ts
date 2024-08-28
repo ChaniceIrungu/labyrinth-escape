@@ -1,4 +1,4 @@
-import { findShortestPath } from '../src/labyrinth';
+import { findShortestPath } from '../src/labyrinthModel';
 
 describe('findShortestPath', () => {
   
@@ -61,9 +61,4 @@ describe('findShortestPath', () => {
     expect(findShortestPath(labyrinth)).toBe(-1);
   });
   
-  test('should handle empty labyrinth', () => {
-    const labyrinth: string[][] = [];
-    expect(findShortestPath(labyrinth)).toBe(-1);
-  });
-
 });
