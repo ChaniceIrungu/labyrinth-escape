@@ -3,12 +3,9 @@ import readline from "readline";
 export function findShortestPath(labyrinth: string[][]): number {
   const rows = labyrinth.length;
   const cols = labyrinth[0].length;
-  let startRow = 0,
-    startCol = 0,
-    endRow = 0,
-    endCol = 0;
+  let startRow = 0, startCol = 0, endRow = 0, endCol = 0;
 
- 
+  // Locate 'S' (Start) and 'E' (End) in the labyrinth
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       if (labyrinth[i][j] === "S") {
@@ -21,7 +18,6 @@ export function findShortestPath(labyrinth: string[][]): number {
     }
   }
 
-
   const directions = [
     [-1, 0],
     [1, 0],
@@ -31,18 +27,20 @@ export function findShortestPath(labyrinth: string[][]): number {
 
   const queue: [number, number, number][] = [[startRow, startCol, 0]];
   const visited = new Set<string>([`S${startRow}${startCol}`]);
-
+  console.log("startRow",startRow)
+  console.log("startCol",startCol)
+  console.log("visited",visited)
+  console.log("queue",queue)
   while (queue.length > 0) {
     const [x, y, dist] = queue.shift()!;
 
-   
-    if (x === endRow && y === endCol) return dist
+    // Return distance if end is reached
+    if (x === endRow && y === endCol) return dist;
 
     for (const [dx, dy] of directions) {
       const newX = x + dx;
       const newY = y + dy;
 
-   
       if (
         newX >= 0 &&
         newX < rows &&
@@ -62,7 +60,6 @@ export function findShortestPath(labyrinth: string[][]): number {
 }
 
 function main() {
-  // Welcome message
   printWelcomeMessage("Welcome to Labyrinth Solver!");
 
   const rl = readline.createInterface({
@@ -70,8 +67,8 @@ function main() {
     output: process.stdout,
   });
 
-  rl.question("How many rows does your labyrinth have? ", (rows) => {
-    rl.question("How many columns does your labyrinth have? ", (cols) => {
+  rl.question("Please enter the number of rows in your labyrinth: ", (rows) => {
+    rl.question("Now, enter the number of columns: ", (cols) => {
       const rowCount = parseInt(rows);
       const colCount = parseInt(cols);
 
@@ -87,9 +84,7 @@ function main() {
 
             if (row.length !== colCount) {
               console.log(
-                `Row ${
-                  rowIndex + 1
-                } should have ${colCount} values. Please try again.`
+                `"Oops! Row ${rowIndex + 1} should have exactly ${colCount} values. Please try that again."`
               );
               getRowInput();
             } else {
@@ -113,14 +108,19 @@ function main() {
       getRowInput();
     });
   });
+
+  rl.on('close', () => {
+    console.log("Thank you for using the Labyrinth Solver!");
+  });
 }
+
 function displayLabyrinth(labyrinth: string[][]) {
   labyrinth.forEach((row) => {
     console.log(row.join("\t"));
   });
 }
 
-function printWelcomeMessage(message: String) {
+function printWelcomeMessage(message: string) {
   const border = "*".repeat(33);
   const emptyLine = `*${" ".repeat(31)}*`;
   const messageLine = `* ${message}  *`;
@@ -130,20 +130,20 @@ function printWelcomeMessage(message: String) {
   console.log(messageLine);
   console.log(emptyLine);
   console.log(border);
-  console.log("\n");
 }
 
 function printInstructions() {
   console.log(`\n${">".repeat(50)}`);
   console.log(
-    ` Your labyrinth layout is a 2D array\n enter each row individually with cells separated by commas. \n`
+    `Your labyrinth layout is a 2D array. Enter each row individually with cells separated by commas.\n`
   );
   console.log("Use the following values:");
   console.log("    0 - Open Path");
   console.log("    1 - Wall");
   console.log("    S - Start Point");
   console.log("    E - Exit Point");
-  console.log("Example: S,0,0,0,E (for a row in a labyrinth with 5 columns)\n");
+  console.log("Example: S,0,1,0,E (for a row in a labyrinth with 5 columns)\n");
   console.log(`${">".repeat(50)}`);
 }
+
 main();
