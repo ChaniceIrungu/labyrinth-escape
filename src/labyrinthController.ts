@@ -25,8 +25,9 @@ export function startNewSession(): void {
         if (rowIndex < rowCount) {
           rl.question(`Row ${rowIndex + 1} => `, (rowInput) => {
             const row = rowInput.split(",").map((cell) => cell.trim());
+            const rowNumber = rowIndex + 1
 
-            const result = validateLabyrinthRow(row, colCount)
+            const result = validateLabyrinthRow(row, colCount, rowNumber)
             if (!result.isValid) {
               console.log(result.message); 
               getRowInput();

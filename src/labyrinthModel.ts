@@ -80,13 +80,14 @@ export function findShortestPath(labyrinth: string[][]): number {
 // Validation for input
 export function validateLabyrinthRow(
   row: string[],
-  expectedLength: number
+  expectedLength: number,
+  rowNumber:number
 ): { isValid: boolean; message: string } {
   // Check the row length
   if (row.length !== expectedLength) {
     return {
       isValid: false,
-      message: `Row should have exactly ${expectedLength} values.`,
+      message: `**Row ${rowNumber} should have exactly ${expectedLength} values seprated by a comma. Use only "0", "1", "S", or "E"`,
     };
   }
 
@@ -103,7 +104,7 @@ export function validateLabyrinthRow(
     } else if (cell !== "0" && cell !== "1") {
       return {
         isValid: false,
-        message: 'Invalid character detected. Use only "0", "1", "S", or "E".',
+        message: `Invalid character detected on Row ${rowNumber}. Use only "0", "1", "S", or "E". Please try again`,
       };
     }
   }
