@@ -11,10 +11,20 @@ export function startNewSession(): void {
     output: process.stdout,
   });
 
-  rl.question("Please enter the number of rows in your labyrinth: ", (rows) => {
-    rl.question("Now, enter the number of columns: ", (cols) => {
-      const rowCount = parseInt(rows);
-      const colCount = parseInt(cols);
+  const promptUserForNumber = (question: string, callback: (num: number) => void): void => {
+    rl.question(question, (input) => {
+      const num = parseInt(input, 10);
+      if (isNaN(num) || num <= 0) {
+        console.log("**Error: Please enter a valid positive number.**");
+        promptUserForNumber(question, callback); // Prompt again if input is invalid
+      } else {
+        callback(num); // Pass the valid number to the callback
+      }
+    });
+  };
+
+  promptUserForNumber("Please enter the number of rows in your labyrinth: ", (rowCount) => {
+    promptUserForNumber("Now, enter the number of columns: ", (colCount) => {
 
       printInstructions();
 
@@ -25,12 +35,12 @@ export function startNewSession(): void {
         if (rowIndex < rowCount) {
           rl.question(`Row ${rowIndex + 1} => `, (rowInput) => {
             const row = rowInput.split(",").map((cell) => cell.trim());
-            const rowNumber = rowIndex + 1
+            const rowNumber = rowIndex + 1;
 
-            const result = validateLabyrinthRow(row, colCount, rowNumber)
+            const result = validateLabyrinthRow(row, colCount, rowNumber);
             if (!result.isValid) {
               console.log(result.message); 
-              getRowInput();
+              getRowInput(); // Prompt for the same row again if it's invalid
             } else {
               labyrinth.push(row);
               rowIndex++;
@@ -54,7 +64,7 @@ export function startNewSession(): void {
         }
       };
 
-      getRowInput();
+      getRowInput(); // Start prompting for row input
     });
   });
 
