@@ -26,7 +26,7 @@ export function findShortestPath(labyrinth: string[][]): number {
 
   if (startCount !== 1 || endCount !== 1) {
     console.log(
-      "Labyrinth must contain exactly one 'S' (Start) and one 'E' (Exit)."
+      "**Error:Labyrinth must contain exactly one 'S' (Start) and one 'E' (Exit)."
     );
     return -1;
   }

@@ -42,7 +42,7 @@ export function startNewSession(): void {
 
           if (!validateLabyrinthStructure(labyrinth)) {
             console.log(
-              `"Your labyrinth must contain exactly one 'S' (Start) and one 'E' (Exit). Please start over."`
+              `**Error: Your labyrinth must contain exactly one 'S' (Start) and one 'E' (Exit). Please start over.`
             );
             return;
           }
